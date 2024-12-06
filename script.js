@@ -113,7 +113,7 @@ document.getElementById('promoForm').addEventListener('submit', async function (
     }
 });
 
-const scriptURL = 'https://script.google.com/macros/s/AKfycbxcwqNA1eHd61Qfsdjja5ptNKk3yOE5SYgtzL9bXnUPcUM0W5uMQrOPJgoSzDGgCYMF/exec'
+const scriptURL = 'https://script.google.com/macros/s/AKfycbzZPRDIvXpGG0qrWP_638WiAJKxe1OjTTb44ox8ZCMuFH1RgU3Dy_bK4QCm-WtVb7tB/exec'
 const form = document.getElementById('promoForm');
 
 form.addEventListener('submit', e => {

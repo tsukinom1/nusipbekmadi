@@ -23,14 +23,11 @@ body::before {
     filter: brightness(0.2); /* Слегка осветляем волка для контраста */
 }
 
-
-
-
-
-header{
+header {
     padding-top: 10px;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
+
 /*-----------header --------*/
 .day {
     font-size: 40px;
@@ -40,22 +37,8 @@ header{
     font-size: 20px;
     line-height: 1;
 }
-/*---------------promo------------*/
 
 /*------common-------*/
-.button {
-    font-size: 24px;
-}
-
-.button-reg:hover {
-    border-color: #ff4d4d; /* Подсвечиваем границу красным */
-    color: #ff4d4d; /* Текст становится красным */
-    background: none;
-    transform: scale(1.05); /* Увеличение */
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3); /* Тень */
-    font-weight: 700;
-    transition: all 0.3s ease;
-}
 a:hover {
     color: #fff; /* Текст становится белым */
     text-shadow: 0 0 10px #ff4d4d; /* Подсвечиваем текст */
@@ -73,52 +56,32 @@ a:hover {
     border-radius: 15px;
     color: white;
     animation: scaleUp 1.5s infinite;
-
-}
-@keyframes scaleUp {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-}
-b {
-    font-weight: bold;
-    color: #ff4d4d; /* Красный цвет */
-    text-shadow: 0 0 10px rgba(255, 0, 0, 0.8), 0 0 20px rgba(255, 0, 0, 0.6); /* Подсветка */
-    animation: glow 1.5s infinite; /* Анимация сияния */
 }
 
-/* Анимация сияния */
-@keyframes glow {
-    0% {
-        text-shadow: 0 0 3px rgba(255, 0, 0, 0.6), 0 0 7px rgba(255, 0, 0, 0.4);
-    }
-    50% {
-        text-shadow: 0 0 8px rgba(255, 0, 0, 0.8), 0 0 12px rgba(255, 0, 0, 0.8);
-    }
-    100% {
-        text-shadow: 0 0 3px rgba(255, 0, 0, 0.6), 0 0 7px rgba(255, 0, 0, 0.4);
-    }
+.button-reg:hover {
+    border-color: #ff4d4d; /* Подсвечиваем границу красным */
+    color: #ff4d4d; /* Текст становится красным */
+    background: none;
+    transform: scale(1.05); /* Увеличение */
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3); /* Тень */
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.bold {
+    color: #ff4d4d;
+    animation: glow 1.5s infinite;
 }
 
 .g-10 {
     gap: 10px;
 }
 
-.fs-24 {
-    font-size: 24px;
+.opacity-6 {
+    opacity: 0.6;
 }
 
-.fs-16 {
-    font-size: 18px;
-}
-
-.opacity-7 {
-    opacity: 0.7;
-}
-
+/*---------------promo------------------*/
 .image-container {
     position: relative;
     width: 100%;
@@ -146,15 +109,7 @@ b {
     margin: 0 auto;
 }
 
-.icon {
-    padding: 0;
-    max-height: 150px;
-}
-
-.text {
-    font-size: 14px;
-}
-
+/*-----------Footer-------------*/
 .footer {
     padding: 10px 0;
     font-size: 20px;
@@ -163,7 +118,7 @@ b {
     width: 100%;
 }
 
-/* Стиль для фона модального окна */
+/*--------- Стиль для фона модального окна -------------*/
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -179,13 +134,6 @@ b {
     animation: fadeIn 0.5s forwards;
 }
 
-/* Анимация появления фона */
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-        pointer-events: all;
-    }
-}
 
 /* Модальное окно */
 .modal-content {
@@ -221,19 +169,106 @@ b {
     cursor: pointer;
     padding: 0;
 }
-input{
+
+input {
     margin-bottom: 10px;
 }
-/* Адаптивность для мобильных устройств */
-@media (max-width: 768px) {
-    .wc{
-        margin-top: 10px;
+
+/* Адаптивность */
+@media (max-width: 5000px) {
+    .title {
+        text-align: center;
     }
-    .button{
-        padding: 15px 10px;
+    .subtitle {
+        margin: 20px auto 0;
+        text-align: center;
+        max-width: 95%;
+        font-size: 24px;
+        line-height: 1.4;
+    }
+    .button {
+        padding: 10px 20px;
+    }
+    .button-info {
+        margin-top: 10px;
+        max-width: 95%;
+        font-size: 26px;
     }
     .button-reg {
-        width: 250px;
+        font-size: 26px;
+        width: 60%;
+        margin: 20px auto 0;
+    }
+    .order {
+        margin-top: 20px;
+        height: 80vh;
+        width: 60%;
+    }
+    .block {
+        width: 55%;
+        margin-bottom: 25px;
+    }
+    .card-text {
+        line-height: 1.2;
+        font-size: 30px;
+    }
+
+}
+@media (max-width: 1200px) {
+    .order {
+        height: 85vh;
+        width: 85%;
+    }
+    .block {
+        width: 80%;
+    }
+    .card-text {
+        line-height: 1.2;
+        font-size: 30px;
+    }
+}
+@media (max-width: 992px) {
+    .subtitle {
+        font-size: 22px;
+    }
+    .button-info {
+        font-size: 24px;
+    }
+    .button-reg {
+        font-size: 24px;
+    }
+    .order {
+        height: 85vh;
+        width: 100%;
+    }
+    .block {
+        width: 100%;
+    }
+    .card-text {
+        font-size: 26px;
+    }
+    .bold {
+    }
+}
+
+@media (max-width: 768px) {
+    .subtitle {
+        max-width: 95%;
+        font-size: 20px;
+        line-height: 1.5;
+    }
+    .button-info {
+        font-size: 20px;
+    }
+    .button-reg {
+        font-size: 20px;
+        width: 50%;
+    }
+    .order {
+        height: 80vh;
+    }
+    .card-text {
+        font-size: 24px;
     }
     .modal-content {
         width: 100%;
@@ -247,47 +282,25 @@ input{
         pointer-events: all;
     }
 }
-
-@media (min-width: 768px) {
+@media (max-width: 576px) {
     .order {
-        height: 60vh;
+        height: 65vh;
     }
-
-    .wc {
-        width: 75%;
-        display: block;
-        margin: 30px auto 0;
-        font-size: 24px;
-    }
-
-    .button {
-        padding: 20px;
-    }
-
     .block {
-        width: 120%;
-        margin: 30px auto 0;
-        font-size: 24px;
+        width: 90%;
     }
-}
-
-@media (min-width: 1200px) {
-    .order {
-        height: 75vh;
-    }
-
-    .block {
-        width: 100%;
-        font-size: 24px;
+    .card-text {
+        line-height: 1.1;
+        font-size: 22px;
     }
 }
 
 
-/* Таймер */
-h2 {
-    margin-top: 20px;
-}
 
+
+
+
+/*-------------- Таймер ------------------------*/
 .countdown {
     padding: 0 10px 10px;
     display: flex;
@@ -296,7 +309,6 @@ h2 {
     align-items: center;
 }
 
-/* Каждая секция времени */
 .time {
     display: flex;
     flex-direction: column;
@@ -327,6 +339,35 @@ h2 {
     color: white;
 }
 
-.fs-20{
-    font-size: 20px;
+
+/*---------АНИМАЦИИ------------- */
+/* Анимация сияния */
+@keyframes glow {
+    0% {
+        text-shadow: 0 0 3px rgba(255, 0, 0, 0.6), 0 0 7px rgba(255, 0, 0, 0.4);
+    }
+    50% {
+        text-shadow: 0 0 8px rgba(255, 0, 0, 0.8), 0 0 12px rgba(255, 0, 0, 0.8);
+    }
+    100% {
+        text-shadow: 0 0 3px rgba(255, 0, 0, 0.6), 0 0 7px rgba(255, 0, 0, 0.4);
+    }
+}
+
+/* Анимация пульса */
+@keyframes scaleUp {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Анимация появления фона */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        pointer-events: all;
+    }
 }
