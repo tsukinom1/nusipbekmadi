@@ -1,0 +1,332 @@
+body {
+    font-family: 'Arial', sans-serif;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    color: white; /* Цвет текста для контраста */
+    overflow-x: hidden;
+}
+
+/* Фон с волком */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('./wolf.jpg') no-repeat center center;
+    background-size: cover; /* Волк покрывает весь экран */
+    opacity: 1; /* Четкость волка (меньше прозрачности) */
+    z-index: -2; /* За всеми элементами */
+    filter: brightness(0.2); /* Слегка осветляем волка для контраста */
+}
+
+
+
+
+
+header{
+    padding-top: 10px;
+    margin-bottom: 50px;
+}
+/*-----------header --------*/
+.day {
+    font-size: 40px;
+}
+
+.month {
+    font-size: 20px;
+    line-height: 1;
+}
+/*---------------promo------------*/
+
+/*------common-------*/
+.button {
+    font-size: 24px;
+}
+
+.button-reg:hover {
+    border-color: #ff4d4d; /* Подсвечиваем границу красным */
+    color: #ff4d4d; /* Текст становится красным */
+    background: none;
+    transform: scale(1.05); /* Увеличение */
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3); /* Тень */
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+a:hover {
+    color: #fff; /* Текст становится белым */
+    text-shadow: 0 0 10px #ff4d4d; /* Подсвечиваем текст */
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
+.button-info {
+    background: rgba(0, 0, 0, 0.36);
+    border-radius: 10px;
+    color: white;
+}
+
+.button-reg {
+    background: #b08e52;
+    border-radius: 15px;
+    color: white;
+    animation: scaleUp 1.5s infinite;
+
+}
+@keyframes scaleUp {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+b {
+    font-weight: bold;
+    color: #ff4d4d; /* Красный цвет */
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.8), 0 0 20px rgba(255, 0, 0, 0.6); /* Подсветка */
+    animation: glow 1.5s infinite; /* Анимация сияния */
+}
+
+/* Анимация сияния */
+@keyframes glow {
+    0% {
+        text-shadow: 0 0 3px rgba(255, 0, 0, 0.6), 0 0 7px rgba(255, 0, 0, 0.4);
+    }
+    50% {
+        text-shadow: 0 0 8px rgba(255, 0, 0, 0.8), 0 0 12px rgba(255, 0, 0, 0.8);
+    }
+    100% {
+        text-shadow: 0 0 3px rgba(255, 0, 0, 0.6), 0 0 7px rgba(255, 0, 0, 0.4);
+    }
+}
+
+.g-10 {
+    gap: 10px;
+}
+
+.fs-24 {
+    font-size: 24px;
+}
+
+.fs-16 {
+    font-size: 18px;
+}
+
+.opacity-7 {
+    opacity: 0.7;
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+}
+
+.order {
+    display: block;
+    margin: 50px auto 0;
+    height: 60vh;
+    overflow: hidden;
+    width: 75%;
+    position: relative;
+}
+
+.block {
+    position: absolute;
+    bottom: 0; /* Расположить блок внизу изображения */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%; /* Ширина блока относительно изображения */
+    background-color: rgba(125, 121, 121, 0.77); /* Затемнение фона для читаемости */
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+
+.icon {
+    padding: 0;
+    max-height: 150px;
+}
+
+.text {
+    font-size: 14px;
+}
+
+.footer {
+    padding: 10px 0;
+    font-size: 20px;
+    margin-top: 30px;
+    background: gray;
+    width: 100%;
+}
+
+/* Стиль для фона модального окна */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #ffffff; /* Белый фон */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    animation: fadeIn 0.5s forwards;
+}
+
+/* Анимация появления фона */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        pointer-events: all;
+    }
+}
+
+/* Модальное окно */
+.modal-content {
+    position: relative;
+    max-width: 600px;
+    width: 90%;
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    transform: translateY(-50px);
+    animation: slideIn 0.5s forwards;
+}
+
+/* Анимация появления модального окна */
+@keyframes slideIn {
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* Кнопка закрытия, позиционированная справа */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-close {
+    border: none;
+    background: transparent;
+    font-size: 1.5rem;
+    color: #000;
+    cursor: pointer;
+    padding: 0;
+}
+input{
+    margin-bottom: 10px;
+}
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .wc{
+        margin-top: 10px;
+    }
+    .button{
+        padding: 15px 10px;
+    }
+    .button-reg {
+        width: 250px;
+    }
+    .modal-content {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        padding: 20px 15px;
+    }
+
+    .modal-overlay {
+        opacity: 1;
+        pointer-events: all;
+    }
+}
+
+@media (min-width: 768px) {
+    .order {
+        height: 60vh;
+    }
+
+    .wc {
+        width: 75%;
+        display: block;
+        margin: 30px auto 0;
+        font-size: 24px;
+    }
+
+    .button {
+        padding: 20px;
+    }
+
+    .block {
+        width: 120%;
+        margin: 30px auto 0;
+        font-size: 24px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .order {
+        height: 75vh;
+    }
+
+    .block {
+        width: 100%;
+        font-size: 24px;
+    }
+}
+
+
+/* Таймер */
+h2 {
+    margin-top: 20px;
+}
+
+.countdown {
+    padding: 0 10px 10px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Каждая секция времени */
+.time {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 10);
+    width: 100px;
+    height: 120px;
+}
+
+.time span {
+    display: block;
+    text-align: center;
+}
+
+#hours, #minutes, #seconds {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: white;
+}
+
+.label {
+    margin-top: 5px;
+    font-size: 1rem;
+    color: white;
+}
+
+.fs-20{
+    font-size: 20px;
+}
