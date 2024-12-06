@@ -75,9 +75,12 @@ document.getElementById('promoForm').addEventListener('submit', async function (
     e.preventDefault();
 
     const name = document.getElementById('name').value;
-    const number = document.getElementById('number').value;
+    let number = document.getElementById('number').value;
     const errorElement = document.getElementById('error');
     const successElement = document.getElementById('success');
+
+    // Убираем все пробелы из номера
+    number = number.replace(/\s+/g, "");
 
     // Проверка на пустые поля
     if (!name || !number) {
@@ -113,7 +116,8 @@ document.getElementById('promoForm').addEventListener('submit', async function (
     }
 });
 
-const scriptURL = 'https://script.google.com/macros/s/AKfycbzZPRDIvXpGG0qrWP_638WiAJKxe1OjTTb44ox8ZCMuFH1RgU3Dy_bK4QCm-WtVb7tB/exec'
+
+const scriptURL = 'https://script.google.com/macros/s/AKfycbxMdZRERVaCv4j3MaVahQLZYDuea6ceuvS10J27Mf9iuIJFBbO1YIKIHlKX1mq2fcT4/exec'
 const form = document.getElementById('promoForm');
 
 form.addEventListener('submit', e => {
