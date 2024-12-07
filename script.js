@@ -71,84 +71,28 @@ function closeModal() {
 }
 // Маска для номера телефона
 document.getElementById('number').addEventListener('input', function (e) {
-    let value = e.target.value.replace(/\D/g, ""); // Удаляем все символы, кроме цифр
+    let value = e.target.value.replace(/\D/g, ""); // Удаляем все нечисловые символы
 
-    if (value.length > 0) {
-        value = "8" + value.substring(1); // Всегда начинаем с "8"
+    // Ограничиваем длину до 11 символов
+    if (value.length > 11) {
+        value = value.substring(0, 11);
     }
 
+    // Форматируем номер: "8 747 777 7777"
     if (value.length > 1) {
-        value = value.substring(0, 1) + " (" + value.substring(1);
+        value = value[0] + " " + value.substring(1);
     }
     if (value.length > 5) {
-        value = value.substring(0, 6) + ") " + value.substring(6);
+        value = value.substring(0, 5) + " " + value.substring(5);
     }
-    if (value.length > 10) {
-        value = value.substring(0, 10) + " " + value.substring(10);
-    }
-    if (value.length > 13) {
-        value = value.substring(0, 13) + " " + value.substring(13);
-    }
-    if (value.length > 16) {
-        value = value.substring(0, 16); // Ограничиваем длину
+    if (value.length > 9) {
+        value = value.substring(0, 9) + " " + value.substring(9);
     }
 
-    e.target.value = value; // Устанавливаем форматированный номер
+    // Устанавливаем отформатированное значение
+    e.target.value = value;
 });
 
-// Обработка отправки формы
-document.getElementById('promoForm').addEventListener('submit', async function (e) {
-    e.preventDefault();
-
-    const name = document.getElementById('name').value;
-    let number = document.getElementById('number').value;
-    const errorElement = document.getElementById('error');
-    const successElement = document.getElementById('success');
-
-    // Убираем все символы, кроме цифр
-    number = number.replace(/\D/g, "");
-
-    // Проверка на пустые поля
-    if (!name || !number) {
-        errorElement.textContent = "Барлық өрістерді толтырыңыз!";
-        errorElement.style.display = 'block';
-        setTimeout(() => errorElement.style.display = 'none', 5000); // Скрыть ошибку через 5 секунд
-        return;
-    }
-
-    // Регулярное выражение для валидации номера
-    const phoneRegex = /^8\d{10}$/;
-    if (!phoneRegex.test(number)) {
-        errorElement.textContent = "Номер форматы: 8xxxxxxxxxx";
-        errorElement.style.display = 'block';
-        setTimeout(() => errorElement.style.display = 'none', 5000); // Скрыть ошибку через 5 секунд
-        return;
-    }
-
-    try {
-        // Отправка данных в Google Sheets
-        const response = await fetch(scriptURL, {
-            method: 'POST',
-            body: new FormData(document.getElementById('promoForm'))
-        });
-
-        const result = await response.json();
-        if (result.result === 'success') {
-            successElement.textContent = "Тіркелу сәтті өтті!";
-            successElement.style.display = 'block';
-            setTimeout(() => {
-                window.location.href = "https://chat.whatsapp.com/JK3gdtp8Dyp7WHeqvMObmy";
-            }, 2000);
-        } else {
-            throw new Error(result.message);
-        }
-    } catch (error) {
-        console.error("Ошибка при добавлении данных:", error);
-        errorElement.textContent = "Произошла ошибка при сохранении данных.";
-        errorElement.style.display = 'block';
-        setTimeout(() => errorElement.style.display = 'none', 5000); // Скрыть ошибку через 5 секунд
-    }
-});
 
 
 
@@ -158,6 +102,28 @@ const form = document.getElementById('promoForm');
 form.addEventListener('submit', e => {
     e.preventDefault(); // Отключаем стандартную отправку формы
 
+    const name = document.getElementById('name').value.trim();
+    let number = document.getElementById('number').value.replace(/\D/g, ""); // Удаляем все символы, кроме цифр
+    const errorElement = document.getElementById('error');
+    const successElement = document.getElementById('success');
+
+    // Проверка на пустые поля
+    if (!name || !number) {
+        errorElement.textContent = "Барлық өрістерді толтырыңыз!";
+        errorElement.style.display = 'block';
+        setTimeout(() => errorElement.style.display = 'none', 5000);
+        return;
+    }
+
+    // Проверка номера: 11 символов и начинается с 8
+    if (number.length !== 11 || !number.startsWith("8")) {
+        errorElement.textContent = "Нөмеріңізді дұрыс жазуды сұраймыз!";
+        errorElement.style.display = 'block';
+        setTimeout(() => errorElement.style.display = 'none', 5000);
+        return;
+    }
+
+    // Отправка данных в Google Sheets
     fetch(scriptURL, {
         method: 'POST',
         body: new FormData(form)
@@ -166,14 +132,22 @@ form.addEventListener('submit', e => {
         .then(data => {
             if (data.result === 'success') {
                 console.log('Успешно!', data);
-                successElement.textContent = "Тіркелу сәтті өтті!";
+                successElement.textContent = "Тіркелу сәтті өтті! Сізді WhatsApp-қа аударудамыз";
                 successElement.style.display = 'block';
+                setTimeout(() => {
+                    window.location.href = "https://chat.whatsapp.com/JK3gdtp8Dyp7WHeqvMObmy";
+                }, 2000);
             } else {
                 console.error('Ошибка:', data.message);
-                errorElement.textContent = data.message;
+                errorElement.textContent = data.message || "Произошла ошибка!";
                 errorElement.style.display = 'block';
+                setTimeout(() => errorElement.style.display = 'none', 5000);
             }
         })
-        .catch(error => console.error('Ошибка!', error.message));
+        .catch(error => {
+            console.error('Ошибка!', error.message);
+            errorElement.textContent = "Произошла ошибка при отправке данных.";
+            errorElement.style.display = 'block';
+            setTimeout(() => errorElement.style.display = 'none', 5000);
+        });
 });
-
