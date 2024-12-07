@@ -104,6 +104,7 @@ form.addEventListener('submit', e => {
     let number = document.getElementById('number').value.replace(/\D/g, ""); // Удаляем все символы, кроме цифр
     const errorElement = document.getElementById('error');
     const successElement = document.getElementById('success');
+    const loadingElement = document.getElementById('loading'); // Индикатор загрузки
 
     // Проверка на пустые поля
     if (!name || !number) {
@@ -121,6 +122,9 @@ form.addEventListener('submit', e => {
         return;
     }
 
+    // Показать индикатор загрузки
+    loadingElement.style.display = 'block';
+
     // Отправка данных в Google Sheets
     fetch(scriptURL, {
         method: 'POST',
@@ -128,6 +132,9 @@ form.addEventListener('submit', e => {
     })
         .then(response => response.json())
         .then(data => {
+            // Скрыть индикатор загрузки
+            loadingElement.style.display = 'none';
+
             if (data.result === 'success') {
                 console.log('Успешно!', data);
                 successElement.textContent = "Тіркелу сәтті өтті! Сізді WhatsApp-қа аударудамыз";
@@ -143,6 +150,9 @@ form.addEventListener('submit', e => {
             }
         })
         .catch(error => {
+            // Скрыть индикатор загрузки
+            loadingElement.style.display = 'none';
+
             console.error('Ошибка!', error.message);
             errorElement.textContent = "Произошла ошибка при отправке данных.";
             errorElement.style.display = 'block';

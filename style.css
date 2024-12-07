@@ -90,7 +90,9 @@ a:hover {
 
 .order {
     display: block;
+    margin: 0 auto ;
     overflow: hidden;
+    width: 75%;
     position: relative;
 }
 
@@ -145,7 +147,12 @@ a:hover {
     animation: slideIn 0.5s forwards;
 }
 
-
+/* Анимация появления модального окна */
+@keyframes slideIn {
+    to {
+        transform: translateY(0);
+    }
+}
 
 /* Кнопка закрытия, позиционированная справа */
 .modal-header {
@@ -201,7 +208,6 @@ h1{
         margin: 10px auto 0;
     }
     .order {
-        margin-top: 10px;
         height: 80vh;
         width: 60%;
     }
@@ -376,11 +382,5 @@ h1{
     to {
         opacity: 1;
         pointer-events: all;
-    }
-}
-/* Анимация появления модального окна */
-@keyframes slideIn {
-    to {
-        transform: translateY(0);
     }
 }
