@@ -1,61 +1,59 @@
 function startCountdown() {
-    const targetHour = 19;
-    const targetMinute = 50;
+    const targetHour = 20; // Час целевого времени
+    const targetMinute = 0; // Минуты целевого времени
 
     function updateTimer() {
         const now = new Date();
         const target = new Date();
+
+        // Устанавливаем целевое время
         target.setHours(targetHour, targetMinute, 0, 0);
 
+        // Если текущее время позже 20:00, переключаемся на следующий день
         if (now > target) {
-            // Если текущая дата уже позже 19:50, переключаем на следующий день
             target.setDate(target.getDate() + 1);
         }
 
-        const diff = target - now;
+        const diff = target - now; // Разница в миллисекундах
         const hours = Math.floor(diff / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
+        // Обновляем DOM
         document.getElementById("hours").textContent = hours.toString().padStart(2, "0");
         document.getElementById("minutes").textContent = minutes.toString().padStart(2, "0");
         document.getElementById("seconds").textContent = seconds.toString().padStart(2, "0");
     }
 
+    // Инициализация таймера
     updateTimer();
-    setInterval(updateTimer, 1000);
+    setInterval(updateTimer, 1000); // Обновляем каждую секунду
 }
 
 startCountdown();
 
-//header
+// Дата и месяц в заголовке
 const monthsInKazakh = [
     "қаңтар", "ақпан", "наурыз", "сәуір", "мамыр", "маусым",
     "шілде", "тамыз", "қыркүйек", "қазан", "қараша", "желтоқсан"
 ];
-const courseTime = "19:50"; // Время окончания дня курса
 
-const updateDate = () => {
+function updateDate() {
     const now = new Date();
     const utcOffset = 5; // UTC+5
     const localDate = new Date(now.getTime() + utcOffset * 60 * 60 * 1000);
 
-    const hours = localDate.getUTCHours();
-    const minutes = localDate.getUTCMinutes();
-
-    if (hours > 19 || (hours === 19 && minutes >= 50)) {
-        localDate.setUTCDate(localDate.getUTCDate() + 1);
-    }
-
     const day = localDate.getUTCDate();
     const monthIndex = localDate.getUTCMonth();
 
+    // Обновляем элементы DOM с датой и месяцем
     document.querySelector('.day').textContent = day;
     document.querySelector('.month').textContent = monthsInKazakh[monthIndex];
-};
+}
 
-setInterval(updateDate, 1000); // Обновляем дату каждую секунду
-updateDate(); // Инициализируем сразу
+// Обновляем дату каждую секунду
+setInterval(updateDate, 1000);
+updateDate();
 
 
 //promo
@@ -136,7 +134,7 @@ form.addEventListener('submit', e => {
                 successElement.style.display = 'block';
                 setTimeout(() => {
                     window.location.href = "https://chat.whatsapp.com/JK3gdtp8Dyp7WHeqvMObmy";
-                }, 2000);
+                }, 1000);
             } else {
                 console.error('Ошибка:', data.message);
                 errorElement.textContent = data.message || "Произошла ошибка!";

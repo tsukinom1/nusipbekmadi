@@ -25,7 +25,7 @@ body::before {
 
 header {
     padding-top: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 /*-----------header --------*/
@@ -90,10 +90,7 @@ a:hover {
 
 .order {
     display: block;
-    margin: 50px auto 0;
-    height: 60vh;
     overflow: hidden;
-    width: 75%;
     position: relative;
 }
 
@@ -148,12 +145,7 @@ a:hover {
     animation: slideIn 0.5s forwards;
 }
 
-/* Анимация появления модального окна */
-@keyframes slideIn {
-    to {
-        transform: translateY(0);
-    }
-}
+
 
 /* Кнопка закрытия, позиционированная справа */
 .modal-header {
@@ -174,6 +166,9 @@ a:hover {
 input {
     margin-bottom: 10px;
 }
+h1{
+    margin: 0;
+}
 
 /* Адаптивность */
 @media (max-width: 5000px) {
@@ -182,14 +177,14 @@ input {
         font-weight: 600;
     }
     .subtitle {
-        margin: 20px auto 0;
+        margin: 10px auto 0;
         text-align: center;
         max-width: 95%;
         font-size: 24px;
         line-height: 1.4;
     }
     .button {
-        padding: 10px 20px;
+        padding: 5px 20px;
     }
     .button-info {
         margin-top: 10px;
@@ -203,10 +198,10 @@ input {
     .button-reg {
         font-size: 26px;
         width: 60%;
-        margin: 20px auto 0;
+        margin: 10px auto 0;
     }
     .order {
-        margin-top: 20px;
+        margin-top: 10px;
         height: 80vh;
         width: 60%;
     }
@@ -264,7 +259,7 @@ input {
     .subtitle {
         max-width: 100%;
         font-size: 18px;
-        line-height: 1.2;
+        line-height: 1.1;
     }
     .button-info {
         font-size: 18px;
@@ -295,13 +290,13 @@ input {
 }
 @media (max-width: 576px) {
     .order {
-        height: 55vh;
+        height: 50vh;
     }
     .block {
         width: 100%;
     }
     .card-text {
-        line-height: 1.1;
+        line-height: 1;
         font-size: 18px;
     }
 }
@@ -381,5 +376,11 @@ input {
     to {
         opacity: 1;
         pointer-events: all;
+    }
+}
+/* Анимация появления модального окна */
+@keyframes slideIn {
+    to {
+        transform: translateY(0);
     }
 }
