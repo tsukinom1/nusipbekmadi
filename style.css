@@ -98,7 +98,7 @@ a:hover {
 
 .block {
     position: absolute;
-    bottom: 0; /* Расположить блок внизу изображения */
+    bottom: -20px; /* Расположить блок внизу изображения */
     left: 50%;
     transform: translateX(-50%);
     width: 90%; /* Ширина блока относительно изображения */
