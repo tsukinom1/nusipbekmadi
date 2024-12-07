@@ -94,7 +94,7 @@ document.getElementById('number').addEventListener('input', function (e) {
 
 
 
-const scriptURL = 'https://script.google.com/macros/s/AKfycbxMdZRERVaCv4j3MaVahQLZYDuea6ceuvS10J27Mf9iuIJFBbO1YIKIHlKX1mq2fcT4/exec'
+const scriptURL = 'https://script.google.com/macros/s/AKfycbyKywfEcq9ElDksY_CPDdP5PDAcMe6Iyk7KwB2WXjqBHrx0U0rYcC4Mu2r24yo1FUAW/exec'
 const form = document.getElementById('promoForm');
 
 form.addEventListener('submit', e => {
