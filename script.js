@@ -91,52 +91,56 @@ document.getElementById('number').addEventListener('input', function (e) {
     e.target.value = value;
 });
 
-
-
-
-const scriptURL = 'https://script.google.com/macros/s/AKfycbxZTyxII5azbMkAJJeSLPGnoMcx-mBPgwc7iz86iUiLkCzImMU-nhb23BmR_g6gpFW9/exec'
+const scriptURL = 'https://script.google.com/macros/s/AKfycbyS2BIDsubytv0e3sIX3XyWctYaDSVqDkHsmc2aTpMFjkS5euGXRjybatzw5ayTONnw/exec'; // Замените на ваш URL Web App
 const form = document.getElementById('promoForm');
 
-form.addEventListener('submit', e => {
+// Обработчик отправки формы
+form.addEventListener('submit', (e) => {
     e.preventDefault(); // Отключаем стандартную отправку формы
 
     const name = document.getElementById('name').value.trim();
-    let number = document.getElementById('number').value.replace(/\D/g, ""); // Удаляем все символы, кроме цифр
+    let number = document.getElementById('number').value.replace(/\D/g, ""); // Удаляем все нечисловые символы
     const errorElement = document.getElementById('error');
     const successElement = document.getElementById('success');
-    const loadingElement = document.getElementById('loading'); // Индикатор загрузки
+    const loadingElement = document.getElementById('loading');
 
-    // Проверка на пустые поля
+    // Сброс сообщений об ошибках и успехе
+    errorElement.style.display = 'none';
+    successElement.style.display = 'none';
+
+    // Проверка ввода
     if (!name || !number) {
         errorElement.textContent = "Барлық өрістерді толтырыңыз!";
         errorElement.style.display = 'block';
-        setTimeout(() => errorElement.style.display = 'none', 5000);
         return;
     }
 
-    // Проверка номера: 11 символов и начинается с 8
     if (number.length !== 11 || !number.startsWith("8")) {
-        errorElement.textContent = "Нөмеріңізді дұрыс жазуды сұраймыз!";
+        errorElement.textContent = "Нөмеріңізді дұрыс жазуды сұраймыз! (8 777 777 77 77)";
         errorElement.style.display = 'block';
-        setTimeout(() => errorElement.style.display = 'none', 5000);
         return;
     }
 
     // Показать индикатор загрузки
     loadingElement.style.display = 'block';
 
-    // Отправка данных в Google Sheets
+    // Подготовка данных для отправки
+    const formData = new URLSearchParams(new FormData(form)).toString(); // Форматируем данные в application/x-www-form-urlencoded
+
     fetch(scriptURL, {
         method: 'POST',
-        body: new FormData(form)
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: formData,
     })
-        .then(response => {
+        .then((response) => {
             if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+                throw new Error(`HTTP ақауы: ${response.status}`);
             }
             return response.json();
         })
-        .then(data => {
+        .then((data) => {
             loadingElement.style.display = 'none';
 
             if (data.result === 'success') {
@@ -145,15 +149,19 @@ form.addEventListener('submit', e => {
                 setTimeout(() => {
                     window.location.href = "https://chat.whatsapp.com/JK3gdtp8Dyp7WHeqvMObmy";
                 }, 1000);
+                form.reset(); // Очистка формы
             } else {
-                throw new Error(data.message || "Произошла ошибка!");
+                throw new Error(data.message || "Серверде қателік орын алды");
             }
         })
-        .catch(error => {
+        .catch((error) => {
             loadingElement.style.display = 'none';
-            errorElement.textContent = `Ошибка: ${error.message}`;
+            errorElement.textContent = `Қателік: ${error.message}`;
             errorElement.style.display = 'block';
-            console.error('Ошибка!', error);
         });
-
 });
+
+
+
+
+
