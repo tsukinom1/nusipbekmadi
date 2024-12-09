@@ -104,7 +104,6 @@ form.addEventListener('submit', (e) => {
     const successElement = document.getElementById('success');
     const loadingElement = document.getElementById('loading');
 
-    // Сброс сообщений об ошибках и успехе
     errorElement.style.display = 'none';
     successElement.style.display = 'none';
 
