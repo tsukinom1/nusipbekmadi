@@ -91,7 +91,7 @@ document.getElementById('number').addEventListener('input', function (e) {
     e.target.value = value;
 });
 
-const scriptURL = 'https://script.google.com/macros/s/AKfycbyS2BIDsubytv0e3sIX3XyWctYaDSVqDkHsmc2aTpMFjkS5euGXRjybatzw5ayTONnw/exec'; // Замените на ваш URL Web App
+const scriptURL = 'https://script.google.com/macros/s/AKfycbxO8H9A8O1hb0HirjW5Hx9BLB-qAq8xpqDgNyAUx0i_nBQJJOptYPxLvGCGsFOFsheC/exec'; // Замените на ваш URL Web App
 const form = document.getElementById('promoForm');
 
 // Обработчик отправки формы
