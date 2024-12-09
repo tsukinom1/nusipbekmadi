@@ -94,7 +94,7 @@ document.getElementById('number').addEventListener('input', function (e) {
 
 
 
-const scriptURL = 'https://script.google.com/macros/s/AKfycbyKywfEcq9ElDksY_CPDdP5PDAcMe6Iyk7KwB2WXjqBHrx0U0rYcC4Mu2r24yo1FUAW/exec'
+const scriptURL = 'https://script.google.com/macros/s/AKfycbxZTyxII5azbMkAJJeSLPGnoMcx-mBPgwc7iz86iUiLkCzImMU-nhb23BmR_g6gpFW9/exec'
 const form = document.getElementById('promoForm');
 
 form.addEventListener('submit', e => {
@@ -130,32 +130,30 @@ form.addEventListener('submit', e => {
         method: 'POST',
         body: new FormData(form)
     })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
-            // Скрыть индикатор загрузки
             loadingElement.style.display = 'none';
 
             if (data.result === 'success') {
-                console.log('Успешно!', data);
                 successElement.textContent = "Тіркелу сәтті өтті! Сізді WhatsApp-қа аударудамыз";
                 successElement.style.display = 'block';
                 setTimeout(() => {
                     window.location.href = "https://chat.whatsapp.com/JK3gdtp8Dyp7WHeqvMObmy";
                 }, 1000);
             } else {
-                console.error('Ошибка:', data.message);
-                errorElement.textContent = data.message || "Произошла ошибка!";
-                errorElement.style.display = 'block';
-                setTimeout(() => errorElement.style.display = 'none', 5000);
+                throw new Error(data.message || "Произошла ошибка!");
             }
         })
         .catch(error => {
-            // Скрыть индикатор загрузки
             loadingElement.style.display = 'none';
-
-            console.error('Ошибка!', error.message);
-            errorElement.textContent = "Произошла ошибка при отправке данных.";
+            errorElement.textContent = `Ошибка: ${error.message}`;
             errorElement.style.display = 'block';
-            setTimeout(() => errorElement.style.display = 'none', 5000);
+            console.error('Ошибка!', error);
         });
+
 });
